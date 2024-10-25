@@ -10,7 +10,7 @@ load_dotenv()
 
 URL = os.getenv('URL')
 PORT = int(os.getenv('PORT'))
-USERNAME = "gridstream"
+USERNAME = os.getenv('USERNAME')
 PASSWORD = os.getenv('PASSWORD')
 
 
