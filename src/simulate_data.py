@@ -21,7 +21,7 @@ def generate_data():
             "derId": "12",
             "type": "solar",
             "isOnline": True,
-            "Timestamp": datetime.datetime.now().isoformat(),
+            "Timestamp": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
             "currentOutput": 7,
             "units": "kW",
             "projectId": "adsf1234dfgr1234",
