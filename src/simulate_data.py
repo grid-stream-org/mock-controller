@@ -53,7 +53,7 @@ def connect(client):
 def publish(client, data):
     project_id = data[0]['projectId']
     payload = json.dumps(data, indent=4)
-    response = client.publish(f"projects/{project_id}", payload=payload, qos=0)
+    response = client.publish(f"projects/{project_id}/data", payload=payload, qos=0)
     if response.rc == 0:
         print(f"Published to Topic: projects/{project_id}\n{payload}")
     else:
