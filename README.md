@@ -1,6 +1,6 @@
 # <p align="center">Mock Controller - Simulator for Controller via MQTT</p>
 
-<p align="center"><img src="assets/logo-white.svg" width="350px"/></p>
+<p align="center"><img src="assets/logo.svg" width="350px"/></p>
 <p align="center">This Python script simulates a controller by generating mock data and publishing it to an MQTT broker. The data represents values that any connected DER would produce and transmit at 1 second intervals.</p>
 
 ## 🧭 Table of Contents
