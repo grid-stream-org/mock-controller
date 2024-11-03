@@ -21,7 +21,7 @@ def generate_data():
             "derId": "12",
             "type": "solar",
             "isOnline": True,
-            "Timestamp": datetime.datetime.now().isoformat(),
+            "Timestamp": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
             "currentOutput": 7,
             "units": "kW",
             "projectId": "adsf1234dfgr1234",
@@ -53,9 +53,10 @@ def connect(client):
 def publish(client, data):
     project_id = data[0]['projectId']
     payload = json.dumps(data, indent=4)
-    response = client.publish(f"projects/{project_id}", payload=payload, qos=0)
+    topic = f"projects/{project_id}/data"
+    response = client.publish(topic, payload=payload, qos=0)
     if response.rc == 0:
-        print(f"Published to Topic: projects/{project_id}\n{payload}")
+        print(f"Published to Topic: {topic}\n{payload}")
     else:
         print(f"Failed to publish message. Error: {response.rc}")
 
