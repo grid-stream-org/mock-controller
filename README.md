@@ -37,6 +37,8 @@
   - Files or directories that git ignores
 - `CONTRIBUTING.md`
   - Document outlining contribution guidelines
+- `Makefile`
+  - Makefile for this project
 - `README.md`
   - This :-)
 - `requirements.txt`
@@ -82,19 +84,10 @@ cp .env.example .env
 ```bash
 git clone https://github.com/grid-stream-org/mock-controller.git
 ```
-2. Install the project dependencies
+2. Run 
 ```bash
-pip install -r requirements.txt
+make run
 ```
-3. Navigate into the source directory
-```bash
-cd src
-```
-4. Run the python script
-```
-python simulate_data.py
-```
-
 
 
 
