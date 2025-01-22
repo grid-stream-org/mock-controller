@@ -64,26 +64,23 @@ CONTROLLERS = [
     }
 ]
 
-DER_TYPES = ['solar', 'battery', 'ev']
-
 
 def generate_data(controller_index):
     controller = CONTROLLERS[controller_index]
     data = []
     for _ in range(randint(1, 5)):
-        der_type = choice(DER_TYPES)
         der = {
-            "derId": str(randrange(10, 100)),
-            "type": der_type,
-            "isOnline": True,
-            "Timestamp": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
-            "currentOutput": randrange(1, 15),
+            "der_id": str(randrange(10, 100)),
+            "is_online": True,
+            "timestamp": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
+            "current_output": randrange(1, 100),
+            "contract_threshold": randrange(1, 100),
+            "power_meter_measurement": randrange(1, 100),
             "units": "kW",
-            "projectId": controller['project_id'],
-            "utilityId": controller['utility_id'],
+            "project_id": controller['project_id'],
             "isStandalone": choice([True, False]),
-            "connectionStartAt": "",
-            "currentSoc": randrange(0, 101) if der_type == "battery" else 0
+            "connection_start_at": "2024-10-10T01:27:09.057Z",
+            "current_soc": randrange(0, 101) if choice(['solar', 'battery', 'ev']) == "battery" else 0
         }
         data.append(der)
     return data
