@@ -78,7 +78,7 @@ def generate_data(controller_index):
             "power_meter_measurement": randrange(1, 100),
             "units": "kW",
             "project_id": controller['project_id'],
-            "isStandalone": choice([True, False]),
+            "is_standalone": choice([True, False]),
             "connection_start_at": "2024-10-10T01:27:09.057Z",
             "current_soc": randrange(0, 101) if choice(['solar', 'battery', 'ev']) == "battery" else 0
         }
