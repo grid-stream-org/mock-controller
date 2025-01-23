@@ -111,7 +111,7 @@ def run_controller(controller_index, stop_event):
         while should_continue(stop_event):
             data = generate_data(controller_index)
             payload = json.dumps(data, indent=4)
-            topic = f"projects/{controller['project_id']}/data"
+            topic = f"projects/{controller['project_id']}"
 
             if client.publish(topic, payload=payload, qos=0).rc == 0:
                 with messages_lock:
