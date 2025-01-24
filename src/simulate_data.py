@@ -1,4 +1,4 @@
-from random import randint, randrange, uniform, random
+from random import randint, randrange, choice, uniform, random
 import datetime
 import os
 import time
@@ -137,47 +137,62 @@ CONTROLLERS = [
             {'der_id': '103', 'type': 'ev', 'capacity': 40}
         ]
     }
-]
+]  # Additional controllers would follow the same pattern
 
 
 def generate_solar_output(capacity, time_of_day=None):
-    # Simulate solar output based on time of day
     if not time_of_day:
         time_of_day = datetime.datetime.now().hour
 
-    # Peak hours are between 10 AM and 4 PM
-    if 10 <= time_of_day <= 16:
-        return uniform(capacity * 0.6, capacity * 0.9)
-    elif 6 <= time_of_day <= 9 or 17 <= time_of_day <= 19:
-        return uniform(capacity * 0.2, capacity * 0.5)
-    else:
-        return 0
+    # Solar generation follows a more natural bell curve
+    if 6 <= time_of_day <= 20:  # Daylight hours
+        peak_hour = 13  # 1 PM is peak
+        hour_factor = 1 - (abs(time_of_day - peak_hour) /
+                           14)  # Creates bell curve
+        base_output = capacity * hour_factor
+        # Add some natural variation (±10%)
+        return max(0, base_output * uniform(0.9, 1.1))
+    return 0  # No output at night
 
 
 def generate_battery_output(capacity, current_soc):
-    # Batteries can discharge at different rates based on SOC
+    # Batteries should only discharge when SOC permits
+    if current_soc < 10:  # Protection against deep discharge
+        return 0
+
+    # More granular SOC-based output
     if current_soc > 80:
-        return uniform(capacity * 0.7, capacity * 0.9)
+        return uniform(capacity * 0.6, capacity * 0.8)
+    elif current_soc > 50:
+        return uniform(capacity * 0.4, capacity * 0.6)
     elif current_soc > 20:
-        return uniform(capacity * 0.4, capacity * 0.7)
-    else:
-        return uniform(capacity * 0.1, capacity * 0.3)
+        return uniform(capacity * 0.2, capacity * 0.4)
+    else:  # Between 10% and 20%
+        return uniform(capacity * 0.1, capacity * 0.2)
 
 
 def generate_ev_output(capacity):
-    # EVs are typically either charging (negative output) or providing power
-    if random() < 0.7:  # 70% chance of charging
-        return -uniform(capacity * 0.1, capacity * 0.3)
-    else:
-        return uniform(capacity * 0.1, capacity * 0.4)
+    # EVs either provide power or are disconnected
+    is_connected = random() < 0.4  # 40% chance of being connected
+    if is_connected:
+        return uniform(capacity * 0.1, capacity * 0.3)
+    return 0
+
+
+def calculate_power_meter(base_load, der_output):
+    # Power meter shows grid consumption after DER contribution
+    # Add realistic noise (±2%)
+    noise = uniform(-0.02, 0.02) * base_load
+    return max(0, base_load - der_output + noise)
 
 
 def generate_data(controller_index):
     controller = CONTROLLERS[controller_index]
     data = []
+    current_time = datetime.datetime.now(datetime.timezone.utc)
 
     for der in controller['ders']:
-        current_soc = randrange(0, 101) if der['type'] == 'battery' else 0
+        current_soc = randrange(20, 91) if der['type'] == 'battery' else 0
 
         if der['type'] == 'solar':
             current_output = generate_solar_output(der['capacity'])
@@ -187,22 +202,25 @@ def generate_data(controller_index):
         else:  # ev
             current_output = generate_ev_output(der['capacity'])
 
-        power_meter = max(0, current_output + uniform(-5, 5))  # Add some noise
+        base_load = controller['baseline'] * \
+            uniform(0.9, 1.1)  # More conservative variation
+        power_meter = calculate_power_meter(base_load, current_output)
 
         der_data = {
             "der_id": der['der_id'],
             "is_online": True,
-            "timestamp": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
+            "timestamp": current_time.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
             "current_output": round(current_output, 2),
             "power_meter_measurement": round(power_meter, 2),
             "baseline": controller['baseline'],
             "contract_threshold": controller['contract_threshold'],
             "units": "kW",
             "project_id": controller['project_id'],
-            "is_standalone": False,  # Most DERs in a project aren't standalone
+            "is_standalone": False,
             "connection_start_at": "2024-10-10T01:27:09.057Z",
             "current_soc": current_soc,
-            "der_type": der['type'],
+            "type": der['type'],  # Added type field
+            "der_type": der['type'],  # Keeping for backward compatibility
             "capacity": der['capacity']
         }
         data.append(der_data)
