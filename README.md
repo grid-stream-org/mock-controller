@@ -53,16 +53,20 @@
 
 ```json
 {
-    "derId": "12",
-    "type": "solar",
-    "isOnline": true,
-    "Timestamp": "2024-10-23T11:51:39.233518",
-    "currentOutput": 7,
-    "units": "kW",
-    "projectId": "project1234",
-    "utilityId": "utility1234",
-    "isStandalone": false,
-    "currentSoc": 0
+  "der_id": "DER_123456",
+  "is_online": true,
+  "timestamp": "2024-02-16T14:30:25.123Z",
+  "current_output": 45.67,
+  "power_meter_measurement": 46.12,
+  "baseline": 50.00,
+  "contract_threshold": 75.00,
+  "units": "kW",
+  "project_id": "PRJ_789012",
+  "is_standalone": false,
+  "connection_start_at": "2024-10-10T01:27:09.057Z",
+  "current_soc": 85.5,
+  "type": "battery_storage",
+  "nameplate_capacity": 100.00
 }
 ```
 

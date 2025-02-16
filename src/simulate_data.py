@@ -15,7 +15,7 @@ USERNAME = os.getenv('USERNAME')
 PASSWORD = os.getenv('PASSWORD')
 
 # Configuration
-MAX_MESSAGES = 1000  # 0 for unlimited, or set a number
+MAX_MESSAGES = 0  # 0 for unlimited, or set a number
 
 # Shared message counting
 total_messages = 0
@@ -23,120 +23,120 @@ messages_lock = threading.Lock()
 
 CONTROLLERS = [
     {
-        'project_id': 'adsf1234dfgr1234',
+        'project_id': '492e323a-b7c5-48ff-bcf7-36ffd170f409',
         'utility_id': 'utility1234',
         'baseline': 150,
         'contract_threshold': 120,
         'ders': [
-            {'der_id': '11', 'type': 'battery', 'capacity': 50},
-            {'der_id': '12', 'type': 'solar', 'capacity': 75},
-            {'der_id': '13', 'type': 'battery', 'capacity': 25}
+            {'der_id': '11', 'type': 'battery', 'nameplate_capacity': 50},
+            {'der_id': '12', 'type': 'solar', 'nameplate_capacity': 75},
+            {'der_id': '13', 'type': 'battery', 'nameplate_capacity': 25}
         ]
     },
-    {
-        'project_id': 'proj5678dfgr5678',
-        'utility_id': 'utility5678',
-        'baseline': 180,
-        'contract_threshold': 150,
-        'ders': [
-            {'der_id': '21', 'type': 'solar', 'capacity': 100},
-            {'der_id': '22', 'type': 'battery', 'capacity': 80}
-        ]
-    },
-    {
-        'project_id': 'proj9012dfgr9012',
-        'utility_id': 'utility9012',
-        'baseline': 200,
-        'contract_threshold': 170,
-        'ders': [
-            {'der_id': '31', 'type': 'solar', 'capacity': 150},
-            {'der_id': '32', 'type': 'battery', 'capacity': 50},
-            {'der_id': '33', 'type': 'ev', 'capacity': 75},
-            {'der_id': '34', 'type': 'solar', 'capacity': 100}
-        ]
-    },
-    {
-        'project_id': 'ctrl3456dfgr3456',
-        'utility_id': 'utility3456',
-        'baseline': 300,
-        'contract_threshold': 250,
-        'ders': [
-            {'der_id': '41', 'type': 'solar', 'capacity': 200},
-            {'der_id': '42', 'type': 'solar', 'capacity': 150},
-            {'der_id': '43', 'type': 'battery', 'capacity': 100},
-            {'der_id': '44', 'type': 'battery', 'capacity': 100},
-            {'der_id': '45', 'type': 'ev', 'capacity': 50}
-        ]
-    },
-    {
-        'project_id': 'home7890dfgr7890',
-        'utility_id': 'utility7890',
-        'baseline': 90,
-        'contract_threshold': 75,
-        'ders': [
-            {'der_id': '51', 'type': 'solar', 'capacity': 50},
-            {'der_id': '52', 'type': 'battery', 'capacity': 30},
-            {'der_id': '53', 'type': 'ev', 'capacity': 40}
-        ]
-    },
-    {
-        'project_id': 'site2345dfgr2345',
-        'utility_id': 'utility2345',
-        'baseline': 250,
-        'contract_threshold': 200,
-        'ders': [
-            {'der_id': '61', 'type': 'solar', 'capacity': 175},
-            {'der_id': '62', 'type': 'solar', 'capacity': 125},
-            {'der_id': '63', 'type': 'battery', 'capacity': 80}
-        ]
-    },
-    {
-        'project_id': 'grid6789dfgr6789',
-        'utility_id': 'utility6789',
-        'baseline': 400,
-        'contract_threshold': 350,
-        'ders': [
-            {'der_id': '71', 'type': 'solar', 'capacity': 250},
-            {'der_id': '72', 'type': 'solar', 'capacity': 200},
-            {'der_id': '73', 'type': 'battery', 'capacity': 150},
-            {'der_id': '74', 'type': 'battery', 'capacity': 100},
-            {'der_id': '75', 'type': 'ev', 'capacity': 75},
-            {'der_id': '76', 'type': 'ev', 'capacity': 75}
-        ]
-    },
-    {
-        'project_id': 'node1357dfgr1357',
-        'utility_id': 'utility1357',
-        'baseline': 140,
-        'contract_threshold': 110,
-        'ders': [
-            {'der_id': '81', 'type': 'solar', 'capacity': 80},
-            {'der_id': '82', 'type': 'battery', 'capacity': 60}
-        ]
-    },
-    {
-        'project_id': 'unit2468dfgr2468',
-        'utility_id': 'utility2468',
-        'baseline': 220,
-        'contract_threshold': 180,
-        'ders': [
-            {'der_id': '91', 'type': 'solar', 'capacity': 120},
-            {'der_id': '92', 'type': 'solar', 'capacity': 100},
-            {'der_id': '93', 'type': 'battery', 'capacity': 75},
-            {'der_id': '94', 'type': 'ev', 'capacity': 50}
-        ]
-    },
-    {
-        'project_id': 'base9876dfgr9876',
-        'utility_id': 'utility9876',
-        'baseline': 160,
-        'contract_threshold': 130,
-        'ders': [
-            {'der_id': '101', 'type': 'solar', 'capacity': 100},
-            {'der_id': '102', 'type': 'battery', 'capacity': 60},
-            {'der_id': '103', 'type': 'ev', 'capacity': 40}
-        ]
-    }
+    # {
+    #     'project_id': 'proj5678dfgr5678',
+    #     'utility_id': 'utility5678',
+    #     'baseline': 180,
+    #     'contract_threshold': 150,
+    #     'ders': [
+    #         {'der_id': '21', 'type': 'solar', 'capacity': 100},
+    #         {'der_id': '22', 'type': 'battery', 'capacity': 80}
+    #     ]
+    # },
+    # {
+    #     'project_id': 'proj9012dfgr9012',
+    #     'utility_id': 'utility9012',
+    #     'baseline': 200,
+    #     'contract_threshold': 170,
+    #     'ders': [
+    #         {'der_id': '31', 'type': 'solar', 'capacity': 150},
+    #         {'der_id': '32', 'type': 'battery', 'capacity': 50},
+    #         {'der_id': '33', 'type': 'ev', 'capacity': 75},
+    #         {'der_id': '34', 'type': 'solar', 'capacity': 100}
+    #     ]
+    # },
+    # {
+    #     'project_id': 'ctrl3456dfgr3456',
+    #     'utility_id': 'utility3456',
+    #     'baseline': 300,
+    #     'contract_threshold': 250,
+    #     'ders': [
+    #         {'der_id': '41', 'type': 'solar', 'capacity': 200},
+    #         {'der_id': '42', 'type': 'solar', 'capacity': 150},
+    #         {'der_id': '43', 'type': 'battery', 'capacity': 100},
+    #         {'der_id': '44', 'type': 'battery', 'capacity': 100},
+    #         {'der_id': '45', 'type': 'ev', 'capacity': 50}
+    #     ]
+    # },
+    # {
+    #     'project_id': 'home7890dfgr7890',
+    #     'utility_id': 'utility7890',
+    #     'baseline': 90,
+    #     'contract_threshold': 75,
+    #     'ders': [
+    #         {'der_id': '51', 'type': 'solar', 'capacity': 50},
+    #         {'der_id': '52', 'type': 'battery', 'capacity': 30},
+    #         {'der_id': '53', 'type': 'ev', 'capacity': 40}
+    #     ]
+    # },
+    # {
+    #     'project_id': 'site2345dfgr2345',
+    #     'utility_id': 'utility2345',
+    #     'baseline': 250,
+    #     'contract_threshold': 200,
+    #     'ders': [
+    #         {'der_id': '61', 'type': 'solar', 'capacity': 175},
+    #         {'der_id': '62', 'type': 'solar', 'capacity': 125},
+    #         {'der_id': '63', 'type': 'battery', 'capacity': 80}
+    #     ]
+    # },
+    # {
+    #     'project_id': 'grid6789dfgr6789',
+    #     'utility_id': 'utility6789',
+    #     'baseline': 400,
+    #     'contract_threshold': 350,
+    #     'ders': [
+    #         {'der_id': '71', 'type': 'solar', 'capacity': 250},
+    #         {'der_id': '72', 'type': 'solar', 'capacity': 200},
+    #         {'der_id': '73', 'type': 'battery', 'capacity': 150},
+    #         {'der_id': '74', 'type': 'battery', 'capacity': 100},
+    #         {'der_id': '75', 'type': 'ev', 'capacity': 75},
+    #         {'der_id': '76', 'type': 'ev', 'capacity': 75}
+    #     ]
+    # },
+    # {
+    #     'project_id': 'node1357dfgr1357',
+    #     'utility_id': 'utility1357',
+    #     'baseline': 140,
+    #     'contract_threshold': 110,
+    #     'ders': [
+    #         {'der_id': '81', 'type': 'solar', 'capacity': 80},
+    #         {'der_id': '82', 'type': 'battery', 'capacity': 60}
+    #     ]
+    # },
+    # {
+    #     'project_id': 'unit2468dfgr2468',
+    #     'utility_id': 'utility2468',
+    #     'baseline': 220,
+    #     'contract_threshold': 180,
+    #     'ders': [
+    #         {'der_id': '91', 'type': 'solar', 'capacity': 120},
+    #         {'der_id': '92', 'type': 'solar', 'capacity': 100},
+    #         {'der_id': '93', 'type': 'battery', 'capacity': 75},
+    #         {'der_id': '94', 'type': 'ev', 'capacity': 50}
+    #     ]
+    # },
+    # {
+    #     'project_id': 'base9876dfgr9876',
+    #     'utility_id': 'utility9876',
+    #     'baseline': 160,
+    #     'contract_threshold': 130,
+    #     'ders': [
+    #         {'der_id': '101', 'type': 'solar', 'capacity': 100},
+    #         {'der_id': '102', 'type': 'battery', 'capacity': 60},
+    #         {'der_id': '103', 'type': 'ev', 'capacity': 40}
+    #     ]
+    # }
 ]  # Additional controllers would follow the same pattern
 
 
@@ -199,12 +199,12 @@ def generate_data(controller_index):
         current_soc = randrange(20, 91) if der['type'] == 'battery' else 0
 
         if der['type'] == 'solar':
-            current_output = generate_solar_output(der['capacity'])
+            current_output = generate_solar_output(der['nameplate_capacity'])
         elif der['type'] == 'battery':
             current_output = generate_battery_output(
-                der['capacity'], current_soc)
+                der['nameplate_capacity'], current_soc)
         else:  # ev
-            current_output = generate_ev_output(der['capacity'])
+            current_output = generate_ev_output(der['nameplate_capacity'])
 
         base_load = controller['baseline'] * \
             uniform(0.9, 1.1)  # More conservative variation
@@ -224,8 +224,7 @@ def generate_data(controller_index):
             "connection_start_at": "2024-10-10T01:27:09.057Z",
             "current_soc": current_soc,
             "type": der['type'],  # Added type field
-            "der_type": der['type'],  # Keeping for backward compatibility
-            "capacity": der['capacity']
+            "nameplate_capacity": der['nameplate_capacity']
         }
         data.append(der_data)
 
