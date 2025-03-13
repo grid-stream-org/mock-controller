@@ -45,6 +45,17 @@ CONTROLLERS = [
             {'der_id': '15', 'type': 'solar', 'nameplate_capacity': 25},
         ]
     }
+    # ericcuenat@gmail.com
+    {
+        'project_id': '8b434748-ff61-4e0f-9f24-654c3abf81fb',
+        'utility_id': 'utility1234',
+        'baseline': 69,
+        'contract_threshold': 20,
+        'ders': [
+            {'der_id': '16', 'type': 'solar', 'nameplate_capacity': 21},
+            {'der_id': '17', 'type': 'ev', 'nameplate_capacity': 10},
+        ]
+    }
 ]
 
 
