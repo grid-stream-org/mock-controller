@@ -44,7 +44,7 @@ CONTROLLERS = [
             {'der_id': '14', 'type': 'battery', 'nameplate_capacity': 50},
             {'der_id': '15', 'type': 'solar', 'nameplate_capacity': 25},
         ]
-    }
+    },
     # ericcuenat@gmail.com
     {
         'project_id': '8b434748-ff61-4e0f-9f24-654c3abf81fb',
