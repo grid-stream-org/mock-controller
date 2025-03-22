@@ -27,7 +27,7 @@ CONTROLLERS = [
         'project_id': '492e323a-b7c5-48ff-bcf7-36ffd170f409',
         'utility_id': 'utility1234',
         'baseline': 150,
-        'contract_threshold': 120,
+        'contract_threshold': 120000,
         'ders': [
             {'der_id': '11', 'type': 'battery', 'nameplate_capacity': 50},
             {'der_id': '12', 'type': 'solar', 'nameplate_capacity': 75},
